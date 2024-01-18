@@ -1,16 +1,12 @@
 import Link from 'next/link';
 import styles from './Register.module.scss';
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useRouter } from 'next/router';
 
 const RegisterView = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error,setError] = useState('');
   const {push} = useRouter();
   const heandleSubmit = async  (event : FormEvent<HTMLFormElement> ) => {
     event.preventDefault();
-    setIsLoading(true);
-    setError('');
     const form = event.target as HTMLFormElement;
     const data = {
       email: form.email.value,
@@ -28,21 +24,16 @@ const RegisterView = () => {
 
     if(result.status === 200) {
      form.reset();
-     setIsLoading(false);
      push('/auth/login')
     }else { 
-      setIsLoading(false);
-      setError("Email is already registered");
+      console.log("Error");
     }
   };
-
-
 
   return (
     <main>
       <div className={styles.register}>
         <h1 className={styles.register__title}>Register</h1>
-        {error && <p className={styles.register__error}>{error}</p>}
         <div className={styles.register__form}>
           <form onSubmit={heandleSubmit}>
             <div className={styles.register__form__item}>
@@ -61,9 +52,7 @@ const RegisterView = () => {
               <label htmlFor="password">Password</label>
               <input type="password" id='password' name="password" placeholder="" className={styles.register__form__item__input} />
             </div>
-            <button type='submit' className={styles.register__form__button}>
-              {isLoading ? "Loading..." : "Register"}
-              </button>
+            <button type='submit' className={styles.register__form__button}>Register</button>
           </form>
         </div>
         <p className={styles.register__link}>
