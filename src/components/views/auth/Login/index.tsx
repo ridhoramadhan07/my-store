@@ -54,9 +54,17 @@ const LoginView = () => {
               <input type="password" id='password' name="password" placeholder="" className={styles.login__form__item__input} />
             </div>
             <button type='submit' className={styles.login__form__button}>
-              {isLoading ? "Loading..." : "login"}
+              {isLoading ? "Loading..." : "Login"}
               </button>
           </form>
+          <hr className={styles.login__hr} />
+          <div className={styles.login__withgoole}>
+            <p>Or login with</p>
+          </div>
+          <div className={styles.login__google}>
+            <button className={styles.login__google__button}><i className='bx bxl-facebook-circle'></i>Facebook</button>
+            <button type='button' onClick={() => signIn('google',{callbackUrl, redirect:false})} className={styles.login__google__button}><i className='bx bxl-google'></i>Google</button>
+          </div>
         </div>
         <p className={styles.login__link}>
           Don{"'"}t have an account? Sign Up <Link href="/auth/register">here</Link>

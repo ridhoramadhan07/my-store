@@ -29,8 +29,9 @@
             }
         }
         &__button{
+            font-size: 18px;
             text-align: center;
-            padding: 8px;
+            padding: 13px;
             width: 100%;
             margin: auto;
             outline: none;
@@ -44,6 +45,42 @@
                 background-color: #292828;
                 transition: 0.5s;
             }
+        }
+    }
+
+    &__hr{
+        margin-top: 20px;
+    }
+    &__withgoole{
+        text-align: center;
+        margin-top: 25px;
+        font-size: small;
+
+    }
+    &__google {
+        font-size: small;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        &__button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            border-radius: 8px;
+            border: 1px solid #000;
+            cursor: pointer;
+            width: 30%;
+            margin: 0 5px;
+            background-color: #ffff;
+            gap: 5px;
+            font-size: 13px;
+
+            i{
+                font-size: 25px;
+            }
+            
         }
     }
     &__link{
