@@ -1,0 +1,42 @@
+.button{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 13px;
+    width: 100%;
+    margin: auto;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    border-radius: 15px;
+    
+    font-weight: bold;
+    cursor: pointer;
+    &:hover{
+        background-color: #292828;
+        transition: 0.5s;
+    }
+}
+.google{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #000;
+    cursor: pointer;
+    width: 30%;
+    margin: 0 5px;
+    background-color: #ffff;
+    gap: 5px;
+    font-size: 13px;
+
+    i{
+        font-size: 25px;
+    }
+    
+}
+.primary{
+    background-color: #000;
+    color: #ffff;
+}

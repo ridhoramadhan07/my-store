@@ -3,6 +3,8 @@ import styles from './Login.module.scss';
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
+import Input from '@/components/ui/Input';
+import Button from '@/components/ui/Button';
 
 const LoginView = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -45,17 +47,9 @@ const LoginView = () => {
         {error && <p className={styles.login__error}>{error}</p>}
         <div className={styles.login__form}>
           <form onSubmit={heandleSubmit}>
-            <div className={styles.login__form__item}>
-              <label htmlFor="email">Email</label>
-              <input type="email" id='email' name="email" placeholder="" className={styles.login__form__item__input} />
-            </div>
-            <div className={styles.login__form__item}>
-              <label htmlFor="password">Password</label>
-              <input type="password" id='password' name="password" placeholder="" className={styles.login__form__item__input} />
-            </div>
-            <button type='submit' className={styles.login__form__button}>
-              {isLoading ? "Loading..." : "Login"}
-              </button>
+            <Input type={"email"} name={"email"} label={"email"} placeholder=''/>
+            <Input type={"password"} name={"password"} label={"password"} placeholder=''/>
+            <Button type='submit'>{isLoading ? "Loading..." : "Login"}</Button>
           </form>
           <hr className={styles.login__hr} />
           <div className={styles.login__withgoole}>
