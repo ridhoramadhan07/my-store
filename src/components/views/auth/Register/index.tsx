@@ -21,8 +21,8 @@ const RegisterView = () => {
       phone: form.phone.value,
       password: form.password.value,
     };
-    const result = await authServices.registerAccount(data);
 
+    const result = await authServices.registerAccount(data);
     if (result.status === 200) {
       form.reset();
       setIsError('');
