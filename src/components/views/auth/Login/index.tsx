@@ -39,7 +39,8 @@ const LoginView = () => {
   };
 
   return (
-    <AuthLayout  title={"Login"} link={"/auth/register"} linkText={"Don't have an account? "}>
+    <AuthLayout error={error ? error : ''}  title={"Login"} link={"/auth/register"} linkText={"Don't have an account? "}>
+      
       <form onSubmit={heandleSubmit}>
         <Input type={'email'} name={'email'} label={'Email'} placeholder="" />
         <Input type={'password'} name={'password'} label={'Password'} placeholder="" />

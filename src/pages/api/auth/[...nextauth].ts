@@ -57,7 +57,7 @@ const authOptions:NextAuthOptions=  {
                     type:'google',
                 };
                 await loginWithGoogle(
-                    data,
+                    user,
                     (data : any)=> {
                         token.email=data.email;
                         token.fullname=data.fullname;

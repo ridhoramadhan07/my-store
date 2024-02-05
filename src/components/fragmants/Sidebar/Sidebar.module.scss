@@ -6,13 +6,14 @@
 
   color: #fff;
   padding: 25px;
-  width: 300px;
+  width: 20%;
   height: 100vh;
   &__top {
     &__title {
       margin-bottom: 40px;
       display: flex;
       justify-content: center;
+      font-size: 25px;
     }
     &__lists {
       display: flex;

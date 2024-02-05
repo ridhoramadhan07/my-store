@@ -5,15 +5,17 @@ type Propstypes = {
   type: string;
   name: string;
   placeholder?: string;
+  defaultValue?:string;
+  disabled?: boolean;
 };
 
 const Input = (props: Propstypes) => {
-  const { label, type, name, placeholder, } = props;
+  const { label, type, name, placeholder,defaultValue,disabled } = props;
 
   return (
     <div className={styles.container}>
       {label && <label htmlFor={name}>{label}</label>}
-      <input type={type} id={name} name={name} placeholder={placeholder}  className={styles.container__input} />
+      <input type={type} id={name} name={name} placeholder={placeholder} defaultValue={defaultValue} disabled={disabled} className={styles.container__input} />
     </div>
   );
 };

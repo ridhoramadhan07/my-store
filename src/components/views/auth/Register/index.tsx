@@ -8,7 +8,7 @@ import AuthLayout from '@/components/layouts/AuthLayout';
 const RegisterView = () => {
   const { push } = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [Error, setIsError] = useState('');
+  const [error, setIsError] = useState('');
 
   const heandleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -23,7 +23,8 @@ const RegisterView = () => {
     };
 
     const result = await authServices.registerAccount(data);
-    if (result.status === 200) {
+
+    if (result.status === 200 && result.data) {
       form.reset();
       setIsError('');
       setIsLoading(false);
@@ -36,7 +37,7 @@ const RegisterView = () => {
   };
 
   return (
-    <AuthLayout title="Register" link="/auth/login" linkText="Already have an account? ">
+    <AuthLayout error={error ? error : '' } title="Register" link="/auth/login" linkText="Already have an account? ">
       <form onSubmit={heandleSubmit}>
         <Input type="fullname" label="Fullname" name="fullname" />
         <Input type="email" label="Email" name="email" />

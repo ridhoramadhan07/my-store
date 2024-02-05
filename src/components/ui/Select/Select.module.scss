@@ -2,14 +2,14 @@
     display: flex;
     flex-direction: column;
     margin: 20px 0;
-    &__input{
+    &__select{
         padding: 10px;
         background-color: #eeee;
         margin-top: 5px;
         border-radius: 5px;
         border: none;
         outline: none;
-        &:disabled{
+        &:disable {
             opacity: 0.7;
         }
     }

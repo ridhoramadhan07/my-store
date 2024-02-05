@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styles from './Auth.module.scss';
 import React from 'react';
 
-type authpProps = {
+type authProps = {
     error?:string;
     title?:string;
     children?:React.ReactNode | undefined;
@@ -10,7 +10,7 @@ type authpProps = {
     linkText?: string ;
 };
 
-const AuthLayout = (props : authpProps ) => {
+const AuthLayout = (props : authProps ) => {
     const {title , error , children , link , linkText} = props;
   return (
     <div className={styles.auth}>
