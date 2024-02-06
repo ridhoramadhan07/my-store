@@ -21,23 +21,26 @@ const RegisterView = () => {
       phone: form.phone.value,
       password: form.password.value,
     };
-
-    const result = await authServices.registerAccount(data);
-
-    if (result.status === 200 && result.data) {
-      form.reset();
-      setIsError('');
-      setIsLoading(false);
-      push('/auth/login');
-    } else {
+    try{
+      const result = await authServices.registerAccount(data)  ;
+      if (result.status === 200 && result.data) {
+        form.reset();
+        setIsError('');
+        setIsLoading(false);
+        push('/auth/login');
+      } else {
+        setIsLoading(false);
+        setIsError('Email is already taken');
+      }
+    }catch(error){
       setIsLoading(false);
       setIsError('Email is already taken');
-      console.log('Error');
     }
+
   };
 
   return (
-    <AuthLayout error={error ? error : '' } title="Register" link="/auth/login" linkText="Already have an account? ">
+    <AuthLayout error={error} title="Register" link="/auth/login" linkText="Already have an account? ">
       <form onSubmit={heandleSubmit}>
         <Input type="fullname" label="Fullname" name="fullname" />
         <Input type="email" label="Email" name="email" />
