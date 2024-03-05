@@ -1,0 +1,48 @@
+.toaster {
+  position: fixed;
+  bottom: 30px;
+  right: 60px;
+  z-index: 9999;
+  transform: translateX(-50%, -50%);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  padding: 20px 20px 26px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  &__main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    &__icon {
+      i {
+        font-size: 36px;
+      }
+    }
+    &__text {
+      min-width: 200px;
+      &__title {
+        font-weight: bold;
+        margin-bottom: 3px;
+      }
+    }
+    &__close {
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+    }
+  }
+  &__timer {
+    height: 6px;
+    width: 100%;
+    background-color: #000;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    &--success {
+      background-color: #23be54;
+    }
+  }
+}

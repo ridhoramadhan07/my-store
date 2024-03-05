@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 
 export async function signUP(
   userData: {
+    id?: string;
     email: string;
     fullname: string;
     phone: string;
@@ -10,6 +11,7 @@ export async function signUP(
     role?: string;
     created_at?: Date;
     update_at: Date;
+    image?: string;
   },
   callback: Function
 ) {
@@ -20,6 +22,7 @@ export async function signUP(
     if (!userData.role) {
       userData.role = 'member';
     }
+    userData.image = '';
     userData.password = await bcrypt.hash(userData.password, 10);
     userData.created_at = new Date();
     userData.update_at = new Date();
@@ -39,20 +42,31 @@ export async function signIn(email: string) {
   }
 }
 
-export async function loginWithGoogle(data: { email: string,password:string, role?: string,created_at?: Date, update_at?: Date}, callback: Function ) {
+export async function loginWithGoogle(
+  data: {
+    id?: string;
+    email: string;
+    image: string;
+    password?: string;
+    role?: string;
+    created_at?: Date;
+    update_at?: Date;
+  },
+  callback: Function
+) {
   const user = await retriveDataByField('users', 'email', data.email);
 
   if (user.length > 0) {
     callback(user[0]);
   } else {
-    data.role = 'member',
-    data.created_at = new Date();
+    (data.role = 'member'), (data.created_at = new Date());
     data.update_at = new Date();
     data.password = '';
-      await addData('users', data, (result: boolean) => {
-        if (result) {
-          callback(result);
-        }
-      });
+    await addData('users', data, (status: boolean, res: any) => {
+      data.id = res.path.replace('/users/', '');
+      if (status) {
+        callback(data);
+      }
+    });
   }
 }
