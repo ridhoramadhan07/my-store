@@ -1,18 +1,24 @@
 .modal {
-    top: 0;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1000;
-    background-color: rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &__main {
-        background-color: #fff;
-        padding: 20px;
-        width: 50vw;
-        max-height: 80vh;
-        border-radius: 10px;
+  top: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__main {
+    background-color: #fff;
+    padding: 20px;
+    width: 50vw;
+    max-height: 80vh;
+    border-radius: 10px;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
     }
+  }
 }

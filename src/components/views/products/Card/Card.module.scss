@@ -1,0 +1,32 @@
+.card {
+      padding-top: 10px;
+      width: 100%;
+      display: grid;
+      gap: 20px;
+      row-gap: 40px;
+      grid-template-columns: repeat(3, 1fr);
+      &__item {
+        cursor: pointer;
+        &__image {
+          width: 100%;
+          aspect-ratio: 1/1;
+          height: auto;
+          border-radius: 18px;
+        }
+        &__title {
+          font-size: 18px;
+          font-weight: 500;
+          margin-top: 18px;
+        }
+        &__category {
+          font-size: 15px;
+          font-weight: 400;
+          margin-top: 5px;
+        }
+        &__price {
+          font-size: 15px;
+          font-weight: 500;
+          margin-top: 5px;
+        }
+    }
+}

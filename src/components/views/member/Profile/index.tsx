@@ -49,8 +49,10 @@ const ProfileMemberView = ({ profile, setProfile, session, setToaster }: propTyp
     setIsLoading('picture');
     const form = e.target as HTMLFormElement;
     const file = form.image.files[0];
+    const newName = 'profile.' + file.name.split('.')[1];
+
     if (file) {
-      uploadFile(profile.id, file, async (status: boolean, newImageUrl: string) => {
+      uploadFile(profile.id, file,newName,'users', async (status: boolean, newImageUrl: string) => {
         if (status) {
           const data = {
             image: newImageUrl,

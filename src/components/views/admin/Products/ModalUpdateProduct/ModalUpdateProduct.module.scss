@@ -1,0 +1,48 @@
+.form {
+  width: 100%;
+  label {
+    font-weight: 500;
+    font-size: 18px;
+    text-shadow: 1px 1px 1px rgb(0 0 0 / 10%);
+  }
+  &__stock {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    &__item {
+      width: 50%;
+      margin-bottom: -20px;
+      :nth-child(1) {
+        margin-top: 5px;
+      }
+      label {
+        font-size: 14px;
+      }
+    }
+  }
+  &__image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    &__preview {
+      width: 15%;
+      aspect-ratio: 1/1;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+  }
+  &__btn {
+    &__stock {
+      margin-top: 13px;
+      padding: 10px 18px;
+      margin-bottom: 20px;
+    }
+    &__add {
+      margin-top: 18px;
+      padding: 14px 20px;
+      font-size: 18px;
+    }
+  }
+}

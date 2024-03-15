@@ -1,11 +1,11 @@
-import ProductsAdminView from '@/components/views/admin/Products';
+import ProductView from '@/components/views/products';
 import productServices from '@/services/product';
-import { useSession } from 'next-auth/react';
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
-const AdminProductsPage = ({ setToaster }: any) => {
+const ProductPage = () => {
   const [products, setProducts] = useState([]);
-const session:any = useSession()
+
   const getAllProducts = async () => {
     const { data } = await productServices.getAllProducts();
     setProducts(data.data);
@@ -15,9 +15,12 @@ const session:any = useSession()
   }, []);
   return (
     <>
-      <ProductsAdminView products={products} setToaster={setToaster} session={session}/>
+      <Head>
+        <title>Products</title>
+      </Head>
+      <ProductView products={products}  />
     </>
   );
 };
 
-export default AdminProductsPage;
+export default ProductPage;

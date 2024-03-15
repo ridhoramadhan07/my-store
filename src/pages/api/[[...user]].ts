@@ -1,7 +1,6 @@
 import { deleteData, retriveData, updateData } from '@/lib/firebase/service';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
-import { decode } from 'punycode';
 
 export default async function heandler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {

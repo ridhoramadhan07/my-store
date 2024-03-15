@@ -53,8 +53,8 @@ const ModalUpdateUser = (props: propTypes) => {
       <h1>Update User</h1>
       <form onSubmit={heandleUpdateUser}>
         <Input type="email" label="Email" name="email" defaultValue={updatedUser.email} disabled />
-        <Input type="fullname" label="Fullname" name="fullname" defaultValue={updatedUser.fullname} disabled />
-        <Input type="phone" label="Phone" name="phone" defaultValue={updatedUser.phone} disabled />
+        <Input type="text" label="Fullname" name="fullname" defaultValue={updatedUser.fullname} disabled />
+        <Input type="number" label="Phone" name="phone" defaultValue={updatedUser.phone} disabled />
         <Select
           name="role"
           label="Role"
