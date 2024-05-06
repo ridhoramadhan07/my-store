@@ -4,8 +4,7 @@ import Input from '@/components/ui/Input';
 import Modal from '@/components/ui/Modal';
 import Select from '@/components/ui/Select';
 import userServices from '@/services/user';
-import { useSession } from 'next-auth/react';
-import { Dispatch, FormEvent, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { User } from '@/types/user.type';
 
 type propTypes = {
@@ -13,11 +12,10 @@ type propTypes = {
   setUpdatedUser: Dispatch<SetStateAction<{}>>;
   setUsersData: Dispatch<SetStateAction<User[]>>;
   setToaster: Dispatch<SetStateAction<{}>>;
-  session: any;
 };
 
 const ModalUpdateUser = (props: propTypes) => {
-  const { updatedUser, setUpdatedUser, setUsersData, setToaster, session } = props;
+  const { updatedUser, setUpdatedUser, setUsersData, setToaster} = props;
   const [isLoading, setIsLoading] = useState(false);
   const [error, setIsError] = useState('');
 
@@ -30,7 +28,7 @@ const ModalUpdateUser = (props: propTypes) => {
       role: form.role.value,
     };
 
-    const result = await userServices.updateUser(updatedUser.id, data, session.data?.accessToken);
+    const result = await userServices.updateUser(updatedUser.id, data);
     if (result.status === 200 && result.data) {
       setIsLoading(false);
       setUpdatedUser({});

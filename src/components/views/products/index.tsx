@@ -3,6 +3,7 @@ import styles from './Products.module.scss';
 import { Product } from '@/types/product.type';
 import convertIDR from '@/utils/currency';
 import Card from './Card';
+import Link from 'next/link';
 
 type propTypes = {
   products: Product[];
@@ -39,7 +40,9 @@ const ProductView = (props: propTypes) => {
         </div>
         <div className={styles.product__main__content}>
           {products.map((product: any) => (
-            <Card product={product} key={product.id} />
+            <Link key={product.id} href={`/products/${product.id}`}>
+              <Card product={product} key={product.id} />
+            </Link>
           ))}
         </div>
       </div>

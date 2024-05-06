@@ -23,23 +23,30 @@ const ModalUpdateProduct = (props: propsTypes) => {
   const [isLoading, setIsLoading] = useState(false);
   const [stockCount, setStockCount] = useState(updatedProduct.stock);
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
-  const session: any = useSession();
 
   const heandleStock = (e: any, i: number, type: string) => {
     const newStockCount: any = [...stockCount];
     newStockCount[i][type] = e.target.value;
     setStockCount(newStockCount);
   };
+  
   const updateProduct = async (form: any, newImageURL: string = updatedProduct.image) => {
+    const stock = stockCount.map((stock: { size: string; qty: number; }) => {
+      return {
+        size: stock.size,
+        qty: parseInt(`${stock.qty}`),
+      };
+    });
     const data = {
       name: form.name.value,
-      price: form.price.value,
+      price: parseInt(form.price.value),
+      description: form.description.value,
       category: form.category.value,
-      status: form.status.value,
-      stock: stockCount,
+      status: form.status.value, 
+      stock: stock,
       image: newImageURL,
     };
-    const result = await productServices.updateProduct(updatedProduct.id, data, session.data?.accessToken);
+    const result = await productServices.updateProduct(updatedProduct.id, data);
     if (result.status === 200) {
       setIsLoading(false);
       setUploadedImage(null);
@@ -88,6 +95,7 @@ const ModalUpdateProduct = (props: propsTypes) => {
       <form onSubmit={heandleSubmit} className={styles.form}>
         <Input type="text" label="Name" name="name" placeholder="Insert Product Name" defaultValue={updatedProduct?.name} />
         <Input type="number" label="Price" name="price" placeholder="Insert Product Price" defaultValue={updatedProduct?.price} />
+        <Input type="text" label="Description" name="description" placeholder="Insert Product Description" defaultValue={updatedProduct?.description} />
         <Select
           name="category"
           label="Category"

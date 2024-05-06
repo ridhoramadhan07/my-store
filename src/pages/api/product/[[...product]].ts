@@ -1,12 +1,18 @@
 import { Product } from './../../../types/product.type';
-import { addData, deleteData, retriveData, updateData } from '@/lib/firebase/service';
+import { addData, deleteData, retriveData, retriveDataById, updateData } from '@/lib/firebase/service';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
 
 export default async function heandler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
-    const data = await retriveData('products');
-    res.status(200).json({ status: true, statusCode: 200, massage: 'sussces', data });
+    const { product }: any = req.query;
+    if(product && product[0]) {
+      const data = await retriveDataById('products', product[0]);
+      res.status(200).json({ status: true, statusCode: 200, massage: 'sussces', data });
+    }else {
+      const data = await retriveData('products');
+      res.status(200).json({ status: true, statusCode: 200, massage: 'sussces', data });
+    }
   } else if (req.method === 'POST') {
     const token = req.headers.authorization?.split(' ')[1] || '';
     jwt.verify(token, process.env.NEXT_AUTH_SECRET || '', async (err: any, decoded: any) => {

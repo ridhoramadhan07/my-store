@@ -1,6 +1,6 @@
 import Navbar from '@/components/fragmants/Navbar'
 import Toaster from '@/components/ui/Toaster'
-import '@/styles/globals.css'
+import '@/styles/globals.scss'
 import { SessionProvider } from 'next-auth/react'
 import type { AppProps } from 'next/app'
 import {Poppins} from 'next/font/google'
@@ -8,10 +8,13 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
+
 const poppins = Poppins({
   subsets: ['latin'],
   weight: ['100','200','300','400', '500', '600', '700' ,'800','900'],
 })
+
+
 
 const disableNavbar = ['auth' , 'admin' , 'member']
 

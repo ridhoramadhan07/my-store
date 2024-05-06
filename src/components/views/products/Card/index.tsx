@@ -5,13 +5,12 @@ import Image from 'next/image';
 
 type propType = {
   product: Product;
-  key: string;
 };
 
 const Card = (props: propType) => {
-  const { product, key } = props;
+  const { product} = props;
   return (
-    <div className={styles.card__item} key={key}>
+    <div className={styles.card__item}>
       <Image src={product.image} alt={product.name} width={500} height={500} className={styles.card__item__image} />
       <h4 className={styles.card__item__title}>{product.name}</h4>
       <p className={styles.card__item__category}>{product.category }</p>

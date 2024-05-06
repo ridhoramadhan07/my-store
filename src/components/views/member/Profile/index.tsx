@@ -4,20 +4,30 @@ import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import Image from 'next/image';
 import { uploadFile } from '@/lib/firebase/service';
-import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { Dispatch, FormEvent, SetStateAction, useEffect, useState } from 'react';
 import userServices from '@/services/user';
 import { User } from '@/types/user.type';
 
 type propTypes = {
   setToaster: Dispatch<SetStateAction<{}>>;
-  profile: User | any;
-  session: any;
-  setProfile: Dispatch<SetStateAction<{}>>;
 };
 
-const ProfileMemberView = ({ profile, setProfile, session, setToaster }: propTypes) => {
+
+const ProfileMemberView = ({  setToaster }: propTypes) => {
+
   const [changeImage, setChangeImage] = useState<File | any>({});
   const [isLoading, setIsLoading] = useState('');
+  const [profile, setProfile] = useState<User |any >({});
+  const getProfile = async () => {
+    const { data } = await userServices.getProfile();
+    setProfile(data.data);
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+  
+
 
   const heandleChangeProfile = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +37,7 @@ const ProfileMemberView = ({ profile, setProfile, session, setToaster }: propTyp
       fullname: form.fullname.value,
       phone: form.phone.value,
     };
-    const result = await userServices.updateProfile(data, session.data?.accessToken);
+    const result = await userServices.updateProfile(data);
     if (result.status === 200 && result.data) {
       setIsLoading('');
       setProfile({
@@ -52,12 +62,12 @@ const ProfileMemberView = ({ profile, setProfile, session, setToaster }: propTyp
     const newName = 'profile.' + file.name.split('.')[1];
 
     if (file) {
-      uploadFile(profile.id, file,newName,'users', async (status: boolean, newImageUrl: string) => {
+      uploadFile(profile.id, file, newName, 'users', async (status: boolean, newImageUrl: string) => {
         if (status) {
           const data = {
             image: newImageUrl,
           };
-          const result = await userServices.updateProfile(data, session.data?.accessToken);
+          const result = await userServices.updateProfile(data);
           if (result.status === 200 && result.data) {
             setIsLoading('');
             setProfile({
@@ -96,7 +106,7 @@ const ProfileMemberView = ({ profile, setProfile, session, setToaster }: propTyp
       encryptedPassword: profile.password,
     };
     try {
-      const result = await userServices.updateProfile(data, session.data?.accessToken);
+      const result = await userServices.updateProfile(data);
       if (result.status === 200 && result.data) {
         setIsLoading('');
         form.reset();

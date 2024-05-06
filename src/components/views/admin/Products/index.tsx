@@ -1,6 +1,6 @@
 import AdminLayout from '@/components/layouts/AdminLayout';
 import Button from '@/components/ui/Button';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react';
 import styles from './Products.module.scss';
 import Image from 'next/image';
 import convertIDR from '@/utils/currency';
@@ -56,8 +56,8 @@ const ProductsAdminView = (props: Propstypes) => {
             </thead>
             <tbody>
               {productsData.map((product: any, index: any) => (
-                <>
-                  <tr key={product.id}>
+                <Fragment key={product.id}>
+                  <tr >
                     <td rowSpan={product.stock.length}>{index + 1}</td>
                     <td rowSpan={product.stock.length}>
                       <Image src={product.image} alt={product.name} width={100} height={100} className={styles.products__table__image} />
@@ -79,16 +79,16 @@ const ProductsAdminView = (props: Propstypes) => {
                     </td>
                   </tr>
                   {product.stock.map((stock: { size: string; qty: number }, index: number) => (
-                    <>
+                    <Fragment key={stock.size} >
                       {index > 0 && (
-                        <tr key={stock.size}>
+                        <tr>
                           <td>{stock.size}</td>
                           <td>{stock.qty}</td>
                         </tr>
                       )}
-                    </>
+                    </Fragment>
                   ))}
-                </>
+                </Fragment>
               ))}
             </tbody>
           </table>
@@ -96,7 +96,7 @@ const ProductsAdminView = (props: Propstypes) => {
       </AdminLayout>
       {modalAddProduct && <ModalAddProduct setModalAddProduct={setModalAddProduct} setToaster={setToaster} setProductsData={setProductsData} />}
       {Object.keys(updatedProduct).length > 0 && <ModalUpdateProduct setUpdatedProduct={setUpdatedProduct} updatedProduct={updatedProduct} setToaster={setToaster} setProductsData={setProductsData} />}
-     {Object.keys(deletedProduct).length > 0 && <ModalDleleteProduct setDeletedProduct={setDeletedProduct} deletedProduct={deletedProduct} setToaster={setToaster} setProductsData={setProductsData} session={session}/>}
+     {Object.keys(deletedProduct).length > 0 && <ModalDleleteProduct setDeletedProduct={setDeletedProduct} deletedProduct={deletedProduct} setToaster={setToaster} setProductsData={setProductsData} />}
     </>
   );
 };
